@@ -32,7 +32,7 @@ export function GaugeArc({ value, target }: { value: number; target: number }) {
         <line x1={tx} y1={ty} x2={tx + (cx - tx) * 0.18} y2={ty + (cy - ty) * 0.18} stroke="var(--foreground)" strokeWidth="2" />
       </svg>
       <div className="-mt-6 flex items-baseline gap-1">
-        <span className="text-2xl font-semibold text-foreground">{value}%</span>
+        <span className="text-3xl font-semibold text-foreground">{value}%</span>
       </div>
     </div>
   )

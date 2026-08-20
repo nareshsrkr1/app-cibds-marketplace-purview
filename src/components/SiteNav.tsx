@@ -9,11 +9,11 @@ import {
 
 function Brand() {
   return (
-    <div className="flex items-center gap-2">
-      <span className="flex h-7 w-7 items-center justify-center rounded-sm bg-primary text-sm font-semibold text-primary-foreground">
+    <div className="flex items-center gap-2.5">
+      <span className="flex h-8 w-8 items-center justify-center rounded-sm bg-primary text-base font-semibold text-primary-foreground">
         C
       </span>
-      <span className="text-sm font-semibold text-foreground">CIB Data Marketplace</span>
+      <span className="text-base font-semibold text-foreground">CIB Data Marketplace</span>
     </div>
   )
 }
@@ -27,21 +27,23 @@ const links = [
 export function SiteNav({ onOpenWorkspace }: { onOpenWorkspace: () => void }) {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:px-8">
         <Brand />
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-8 md:flex">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-sm text-foreground/80 transition-colors hover:text-primary"
+              className="text-base text-foreground/80 transition-colors hover:text-primary"
             >
               {l.label}
             </a>
           ))}
         </nav>
         <div className="hidden md:block">
-          <Button onClick={onOpenWorkspace}>Open workspace</Button>
+          <Button onClick={onOpenWorkspace} className="h-10 px-5 text-base">
+            Open workspace
+          </Button>
         </div>
         <Sheet>
           <SheetTrigger asChild>

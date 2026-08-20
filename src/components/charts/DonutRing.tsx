@@ -21,7 +21,7 @@ export function DonutRing({ realised, gap }: { realised: number; gap: number }) 
           strokeLinecap="round"
         />
       </svg>
-      <span className="absolute text-xl font-semibold text-foreground">{pct}%</span>
+      <span className="absolute text-2xl font-semibold text-foreground">{pct}%</span>
     </div>
   )
 }
