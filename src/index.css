@@ -1,0 +1,105 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --color-status-good: var(--status-good);
+  --color-status-warn: var(--status-warn);
+  --color-status-bad: var(--status-bad);
+}
+
+:root {
+  /* Fluent-derived: sharp, low-radius chrome (Microsoft product surfaces sit at
+     2-4px, never pill-shaped) and a single Microsoft-blue primary pulled from
+     adoption.microsoft.com/microsoft-security/purview (link/button blue ~#246EB5,
+     rounded to the closer Fluent token #0F6CBD). Body text is true black-on-white,
+     not a softened neutral, to match Purview's high-contrast Segoe UI look. */
+  --radius: 0.25rem;
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.16 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.16 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.16 0 0);
+  --primary: oklch(0.5 0.14 253);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.95 0.002 260);
+  --secondary-foreground: oklch(0.16 0 0);
+  --muted: oklch(0.96 0.002 260);
+  --muted-foreground: oklch(0.42 0.004 260);
+  --accent: oklch(0.95 0.03 253);
+  --accent-foreground: oklch(0.32 0.1 253);
+  --destructive: oklch(0.55 0.22 25);
+  --border: oklch(0.89 0.003 260);
+  --input: oklch(0.89 0.003 260);
+  --ring: oklch(0.5 0.14 253);
+  --font-sans: "Segoe UI", "Segoe UI Variable", "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Consolas, monospace;
+
+  /* Governance-state colors: used only for classification/status chips, never
+     decoratively, so the eye can scan a table for risk at a glance. */
+  --status-good: oklch(0.6 0.14 152);
+  --status-warn: oklch(0.72 0.15 78);
+  --status-bad: oklch(0.58 0.2 27);
+}
+
+.dark {
+  --background: oklch(0.14 0.004 260);
+  --foreground: oklch(0.96 0.002 260);
+  --card: oklch(0.18 0.005 260);
+  --card-foreground: oklch(0.96 0.002 260);
+  --popover: oklch(0.18 0.005 260);
+  --popover-foreground: oklch(0.96 0.002 260);
+  --primary: oklch(0.72 0.13 253);
+  --primary-foreground: oklch(0.14 0.004 260);
+  --secondary: oklch(0.24 0.006 260);
+  --secondary-foreground: oklch(0.96 0.002 260);
+  --muted: oklch(0.24 0.006 260);
+  --muted-foreground: oklch(0.66 0.006 260);
+  --accent: oklch(0.28 0.05 253);
+  --accent-foreground: oklch(0.88 0.04 253);
+  --destructive: oklch(0.65 0.2 25);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.65 0.12 253);
+
+  --status-good: oklch(0.68 0.13 152);
+  --status-warn: oklch(0.78 0.14 78);
+  --status-bad: oklch(0.65 0.19 27);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
+}
