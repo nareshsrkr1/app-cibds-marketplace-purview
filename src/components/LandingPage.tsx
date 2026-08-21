@@ -5,7 +5,6 @@ import {
   Clock,
   Download,
   Mail,
-  Quote,
   Search,
   Share2,
   ShieldCheck,
@@ -39,7 +38,6 @@ export function LandingPage({ onOpenWorkspace }: { onOpenWorkspace: () => void }
       <UseCases />
       <HowItWorks />
       <Capabilities />
-      <Testimonial />
       <Faq />
       <CtaBand onOpenWorkspace={onOpenWorkspace} />
       <Footer />
@@ -161,7 +159,7 @@ function Hero({ onOpenWorkspace }: { onOpenWorkspace: () => void }) {
             "radial-gradient(50% 60% at 15% 0%, var(--primary), transparent 70%)",
         }}
       />
-      <div className="relative mx-auto grid max-w-7xl 2xl:max-w-[96rem] gap-10 px-6 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-16 lg:py-28">
+      <div className="relative mx-auto grid max-w-7xl 2xl:max-w-[96rem] gap-10 px-6 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1fr_1.15fr] lg:items-start lg:gap-16 lg:py-28">
         <div>
           <div className="mb-6 inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-4 py-1.5 text-sm font-medium text-muted-foreground shadow-sm">
             Wells Fargo · Corporate &amp; Investment Banking
@@ -328,6 +326,11 @@ const useCases = [
     label: "Producers",
     title: "List what you own in minutes.",
     body: "Register a physical dataset, bind its columns to governed business elements, and it's discoverable the moment classification clears.",
+    highlights: [
+      "Bind columns to governed business elements",
+      "Classification inherited automatically",
+      "Track publish SLA on your own console",
+    ],
     preview: <HeroPreview />,
   },
   {
@@ -335,6 +338,11 @@ const useCases = [
     label: "Consumers",
     title: "Find it, request it, get it.",
     body: "Search the catalogue in plain business language, request access to what you need, and track approval without a single email thread.",
+    highlights: [
+      "Search in plain business language",
+      "Request access in a couple of clicks",
+      "See approval status without chasing anyone",
+    ],
     preview: <ConsumerPreview />,
   },
   {
@@ -342,6 +350,11 @@ const useCases = [
     label: "Data Governance",
     title: "Approve with full context.",
     body: "Every request arrives with lineage, classification, and owner attached — review and decide without chasing anyone down.",
+    highlights: [
+      "Lineage and classification attached to every request",
+      "2-day standard SLA, 5-day for PII/Confidential",
+      "Full audit trail of every approval",
+    ],
     preview: <GovernancePreview />,
   },
 ]
@@ -376,10 +389,18 @@ function UseCases() {
         ))}
       </div>
 
-      <div className="mt-10 grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr]">
+      <div className="mt-10 grid items-start gap-12 lg:grid-cols-[0.85fr_1.15fr]">
         <div>
           <h3 className="text-2xl font-semibold tracking-tight text-foreground">{current.title}</h3>
           <p className="mt-3 text-lg leading-relaxed text-muted-foreground">{current.body}</p>
+          <ul className="mt-6 flex flex-col gap-3">
+            {current.highlights.map((h) => (
+              <li key={h} className="flex items-start gap-2.5 text-base text-foreground">
+                <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-primary" />
+                {h}
+              </li>
+            ))}
+          </ul>
         </div>
         <div key={current.key}>{current.preview}</div>
       </div>
@@ -391,34 +412,94 @@ function UseCases() {
 
 const pipelineIcons: LucideIcon[] = [Sprout, UploadCloud, ShieldCheck, Share2, Download]
 
+function WorkflowPreview() {
+  const currentStage = 2
+  return (
+    <BrowserFrame url="workspace.datamarketplace.internal/workflow/DS-CIB-40121">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-xs text-muted-foreground">Tracking</p>
+          <p className="text-base font-semibold text-foreground">Endur P&amp;L and Greeks</p>
+        </div>
+        <Badge variant="secondary" className="h-6 px-2 text-xs font-normal">
+          In review
+        </Badge>
+      </div>
+
+      <div className="mt-5 flex flex-col">
+        {pipeline.map((s, i) => {
+          const Icon = pipelineIcons[i] ?? Sprout
+          const done = i < currentStage
+          const active = i === currentStage
+          return (
+            <div key={s.n} className="flex gap-3">
+              <div className="flex flex-col items-center">
+                <span
+                  className={
+                    "flex size-8 shrink-0 items-center justify-center rounded-full " +
+                    (done
+                      ? "bg-primary text-primary-foreground"
+                      : active
+                        ? "border-2 border-primary text-primary"
+                        : "border border-border text-muted-foreground")
+                  }
+                >
+                  {done ? <CheckCircle2 className="size-4" /> : <Icon className="size-3.5" />}
+                </span>
+                {i < pipeline.length - 1 ? (
+                  <span className={"my-0.5 h-7 w-px " + (done ? "bg-primary" : "bg-border")} />
+                ) : null}
+              </div>
+              <div className={"pb-3.5 " + (active ? "" : done ? "" : "opacity-60")}>
+                <p className="text-sm font-semibold text-foreground">{s.title}</p>
+                <p className="text-xs text-muted-foreground">
+                  {done ? "Complete" : active ? "In progress — " + s.body : s.body}
+                </p>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </BrowserFrame>
+  )
+}
+
 function HowItWorks() {
   return (
     <section id="how-it-works" className="border-t border-border bg-card/60">
       <div className="mx-auto max-w-7xl 2xl:max-w-[96rem] px-6 py-16 sm:px-8 sm:py-24">
-        <div className="max-w-2xl">
-          <p className="text-sm font-semibold tracking-wide text-primary uppercase">How it works</p>
-          <h2 className="mt-2 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            From one team to another — safely, and traceably.
-          </h2>
-          <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            Every dataset follows the same simple path — with meaning and traceability
-            captured at every step.
-          </p>
-        </div>
-        <div className="relative mt-14 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-5">
-          <div className="absolute top-5 right-[10%] left-[10%] hidden h-px bg-border lg:block" />
-          {pipeline.map((s, i) => {
-            const Icon = pipelineIcons[i] ?? Sprout
-            return (
-              <div key={s.n} className="relative">
-                <div className="relative z-10 flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                  <Icon className="size-5" />
-                </div>
-                <h3 className="mt-4 text-base font-semibold text-foreground">{s.title}</h3>
-                <p className="mt-1.5 text-sm text-muted-foreground">{s.body}</p>
-              </div>
-            )
-          })}
+        <div className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <p className="text-sm font-semibold tracking-wide text-primary uppercase">
+              How it works
+            </p>
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+              From one team to another — safely, and traceably.
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+              Every dataset follows the same simple path — with meaning and
+              traceability captured at every step, tracked from the moment it's
+              produced to the moment it's consumed.
+            </p>
+            <div className="mt-8 flex flex-col gap-4">
+              {pipeline.map((s, i) => {
+                const Icon = pipelineIcons[i] ?? Sprout
+                return (
+                  <div key={s.n} className="flex items-center gap-4">
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                      <Icon className="size-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-base font-semibold text-foreground">{s.title}</span>
+                      <span className="text-base text-muted-foreground"> — {s.body}</span>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+
+          <WorkflowPreview />
         </div>
       </div>
     </section>
@@ -461,26 +542,6 @@ function Capabilities() {
               <span className="absolute top-0 left-0 h-6 w-0.5 origin-top scale-y-0 rounded-full bg-primary transition-transform duration-200 group-hover:scale-y-100" />
             </div>
           ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ---------- Testimonial ----------
-
-function Testimonial() {
-  return (
-    <section className="border-y border-border bg-card/60">
-      <div className="mx-auto max-w-4xl px-6 py-16 text-center sm:px-8 sm:py-20">
-        <Quote className="mx-auto size-8 text-primary/40" />
-        <p className="mt-6 text-2xl leading-snug font-medium tracking-tight text-balance sm:text-3xl">
-          "We went from a week of emails to get one dataset approved, to same-day
-          access with full lineage attached. This is the first system where
-          governance made us faster, not slower."
-        </p>
-        <div className="mt-6 text-base text-muted-foreground">
-          VP, Data Governance · Corporate &amp; Investment Banking
         </div>
       </div>
     </section>
