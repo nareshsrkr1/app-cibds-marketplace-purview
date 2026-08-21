@@ -159,9 +159,9 @@ function Hero({ onOpenWorkspace }: { onOpenWorkspace: () => void }) {
             "radial-gradient(50% 60% at 15% 0%, var(--primary), transparent 70%)",
         }}
       />
-      <div className="relative mx-auto grid max-w-7xl 2xl:max-w-[96rem] gap-10 px-6 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1fr_1.15fr] lg:items-start lg:gap-16 lg:py-28">
+      <div className="relative mx-auto grid max-w-7xl 2xl:max-w-[96rem] gap-10 px-6 py-10 sm:px-8 sm:py-14 lg:grid-cols-[1fr_1.15fr] lg:items-start lg:gap-16 lg:py-16">
         <div>
-          <div className="mb-6 inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-4 py-1.5 text-sm font-medium text-muted-foreground shadow-sm">
+          <div className="mb-6 inline-flex w-fit items-center gap-1.5 rounded-full border border-border bg-card px-4 py-1.5 text-sm font-medium text-muted-foreground shadow-sm">
             Wells Fargo · Corporate &amp; Investment Banking
           </div>
           <h1 className="text-4xl leading-[1.12] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl">
@@ -194,6 +194,10 @@ function Hero({ onOpenWorkspace }: { onOpenWorkspace: () => void }) {
 
         <div className="lg:pl-6">
           <HeroPreview />
+          <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
+            <span className="flex size-1.5 rounded-full bg-status-good" />
+            Live view — Producer console, Physical datasets
+          </p>
         </div>
       </div>
     </section>
