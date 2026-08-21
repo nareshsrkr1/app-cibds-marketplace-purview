@@ -1,6 +1,8 @@
 import { useState } from "react"
 import {
   ArrowLeft,
+  ArrowUpRight,
+  ChevronRight,
   LayoutGrid,
   Database,
   Link2,
@@ -11,6 +13,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { ChartCard } from "@/components/charts/ChartCard"
 import { GaugeArc } from "@/components/charts/GaugeArc"
 import { DonutRing } from "@/components/charts/DonutRing"
@@ -90,19 +93,22 @@ function Sidebar({ onBack, className = "" }: { onBack: () => void; className?: s
             key={item.label}
             type="button"
             className={
-              "flex items-center gap-3 rounded-sm px-3.5 py-2.5 text-left text-base transition-colors " +
+              "relative flex items-center gap-3 rounded-sm px-3.5 py-2.5 text-left text-base transition-colors duration-150 " +
               (item.active
-                ? "bg-accent font-medium text-accent-foreground"
-                : "text-foreground/80 hover:bg-accent/60")
+                ? "bg-accent font-medium text-primary"
+                : "text-foreground/80 hover:bg-accent/60 hover:text-foreground")
             }
           >
+            {item.active ? (
+              <span className="absolute top-1.5 bottom-1.5 left-0 w-[3px] rounded-full bg-primary" />
+            ) : null}
             <item.icon className="size-5" />
             {item.label}
           </button>
         ))}
       </nav>
 
-      <div className="mx-3 mt-2 rounded-md border border-border bg-card p-4">
+      <div className="mx-3 mt-2 rounded-md border border-border bg-card p-4 transition-colors duration-150 hover:bg-accent/40">
         <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
           Governance standing
         </p>
@@ -120,7 +126,7 @@ function Sidebar({ onBack, className = "" }: { onBack: () => void; className?: s
       <div className="flex-1" />
 
       <div className="border-t border-border p-3">
-        <div className="flex items-center gap-3 rounded-sm px-3.5 py-2.5">
+        <div className="flex items-center gap-3 rounded-sm px-3.5 py-2.5 transition-colors duration-150 hover:bg-accent/40">
           <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
             NN
           </span>
@@ -132,7 +138,7 @@ function Sidebar({ onBack, className = "" }: { onBack: () => void; className?: s
         <button
           type="button"
           onClick={onBack}
-          className="mt-1 flex w-full items-center gap-3 rounded-sm px-3.5 py-2.5 text-left text-base text-muted-foreground hover:bg-accent/60"
+          className="mt-1 flex w-full items-center gap-3 rounded-sm px-3.5 py-2.5 text-left text-base text-muted-foreground transition-colors duration-150 hover:bg-accent/60"
         >
           <ArrowLeft className="size-5" />
           Back to landing
@@ -146,7 +152,14 @@ function ConsoleHeader({ onMenuClick }: { onMenuClick: () => void }) {
   return (
     <div className="flex flex-wrap items-start justify-between gap-4">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-primary sm:text-3xl">
+        <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+          <span className="cursor-default transition-colors duration-150 hover:text-primary">
+            Workspace
+          </span>
+          <ChevronRight className="size-3.5" />
+          <span>{hero.eyebrow}</span>
+        </div>
+        <h1 className="mt-1 text-2xl font-semibold tracking-tight text-primary sm:text-3xl">
           {hero.eyebrow}
         </h1>
         <p className="mt-1.5 max-w-xl text-base text-muted-foreground">{hero.subtitle}</p>
@@ -159,20 +172,34 @@ function ConsoleHeader({ onMenuClick }: { onMenuClick: () => void }) {
   )
 }
 
+const kpiExplanations: Record<string, string> = {
+  datasets: "Physical datasets you own and have published to the marketplace.",
+  contracts: "Producer contracts governing how your datasets may be used downstream.",
+  pendingGov: "Datasets awaiting classification review by Data Governance.",
+  subreq: "Requests from other teams waiting on your approval.",
+  gaps: "Datasets with columns not yet bound to a governed business element.",
+}
+
 function KpiRow() {
   return (
     <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
       {kpis.map((k) => (
-        <div
-          key={k.id}
-          className={
-            "rounded-md border p-5 " +
-            (k.warn ? "border-status-warn/40 bg-accent" : "border-border bg-card")
-          }
-        >
-          <p className="text-3xl font-semibold text-foreground">{k.value}</p>
-          <p className="mt-1 text-sm text-muted-foreground">{k.label}</p>
-        </div>
+        <Tooltip key={k.id}>
+          <TooltipTrigger asChild>
+            <div
+              className={
+                "cursor-default rounded-md border p-5 transition-shadow duration-150 hover:shadow-md " +
+                (k.warn
+                  ? "border-status-warn/40 bg-accent hover:border-status-warn/60"
+                  : "border-border bg-card hover:border-primary/30")
+              }
+            >
+              <p className="text-3xl font-semibold text-foreground">{k.value}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{k.label}</p>
+            </div>
+          </TooltipTrigger>
+          <TooltipContent>{kpiExplanations[k.id]}</TooltipContent>
+        </Tooltip>
       ))}
     </div>
   )
@@ -236,6 +263,11 @@ function classificationVariant(c: string) {
   return c === "Confidential" ? "destructive" : "secondary"
 }
 
+const classificationExplanations: Record<string, string> = {
+  Internal: "Available to consumers across the firm without additional approval.",
+  Confidential: "Restricted — requires governance approval before access is granted.",
+}
+
 function DatasetsPanel() {
   return (
     <div className="rounded-md border border-border bg-card">
@@ -254,23 +286,49 @@ function DatasetsPanel() {
               <th className="px-5 py-3 font-medium">Class.</th>
               <th className="px-5 py-3 font-medium">Bound</th>
               <th className="px-5 py-3 font-medium">Updated</th>
+              <th className="px-5 py-3 font-medium" aria-hidden="true" />
             </tr>
           </thead>
           <tbody>
             {datasets.map((d) => (
-              <tr key={d.id} className="border-b border-border last:border-0 hover:bg-muted/40">
+              <tr
+                key={d.id}
+                className="group border-b border-border transition-colors duration-150 last:border-0 hover:bg-muted/40"
+              >
                 <td className="px-5 py-3.5">
                   <p className="font-medium text-foreground">{d.name}</p>
                   <p className="text-sm text-muted-foreground">{d.owner}</p>
                 </td>
                 <td className="px-5 py-3.5 text-muted-foreground">{d.sor}</td>
                 <td className="px-5 py-3.5">
-                  <Badge variant={classificationVariant(d.classification)} className="text-sm">
-                    {d.classification}
-                  </Badge>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Badge
+                        variant={classificationVariant(d.classification)}
+                        className="cursor-default text-sm"
+                      >
+                        {d.classification}
+                      </Badge>
+                    </TooltipTrigger>
+                    <TooltipContent>{classificationExplanations[d.classification]}</TooltipContent>
+                  </Tooltip>
                 </td>
                 <td className="px-5 py-3.5 text-foreground">{d.bound}%</td>
                 <td className="px-5 py-3.5 text-muted-foreground">{d.updated}</td>
+                <td className="px-5 py-3.5">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button
+                        type="button"
+                        aria-label={`View ${d.name}`}
+                        className="flex size-7 items-center justify-center rounded-sm text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-100 hover:bg-accent hover:text-primary"
+                      >
+                        <ArrowUpRight className="size-4" />
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent>View dataset</TooltipContent>
+                  </Tooltip>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -290,7 +348,10 @@ function SubscriptionPanel() {
       </div>
       <div className="flex flex-col divide-y divide-border">
         {subscriptionRequests.map((r) => (
-          <div key={r.id} className="p-5">
+          <div
+            key={r.id}
+            className="p-5 transition-colors duration-150 hover:bg-accent/30"
+          >
             <p className="text-base font-medium text-foreground">{r.requester}</p>
             <p className="mt-1 text-sm text-muted-foreground">
               wants <span className="font-medium text-foreground">{r.wants}</span> ·{" "}
