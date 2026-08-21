@@ -44,7 +44,7 @@ export function ConsolePage({ onBack }: { onBack: () => void }) {
         </SheetContent>
       </Sheet>
       <main className="min-w-0 flex-1 px-4 py-8 sm:px-8 sm:py-10 lg:px-10">
-        <div className="mx-auto max-w-6xl 2xl:max-w-[88rem]">
+        <div className="max-w-[100rem]">
           <ConsoleHeader onMenuClick={() => setNavOpen(true)} />
           <KpiRow />
           <ActionRow />
@@ -146,9 +146,9 @@ function ConsoleHeader({ onMenuClick }: { onMenuClick: () => void }) {
   return (
     <div className="flex flex-wrap items-start justify-between gap-4">
       <div>
-        <p className="text-sm font-semibold tracking-wide text-primary uppercase">
+        <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
           {hero.eyebrow}
-        </p>
+        </h1>
         <p className="mt-1.5 max-w-xl text-base text-muted-foreground">{hero.subtitle}</p>
       </div>
       <Button variant="outline" size="sm" className="lg:hidden" onClick={onMenuClick}>
@@ -221,9 +221,13 @@ function ChartGrid() {
 
 function PanelColumns() {
   return (
-    <div className="grid gap-5 lg:grid-cols-[1.6fr_1fr]">
-      <DatasetsPanel />
-      <SubscriptionPanel />
+    <div className="grid min-w-0 gap-5 lg:grid-cols-[1.6fr_1fr]">
+      <div className="min-w-0">
+        <DatasetsPanel />
+      </div>
+      <div className="min-w-0">
+        <SubscriptionPanel />
+      </div>
     </div>
   )
 }
