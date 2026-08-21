@@ -3,6 +3,7 @@ import {
   LayoutGrid,
   Database,
   Link2,
+  ShieldCheck,
   Workflow as WorkflowIcon,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -61,7 +62,7 @@ export function ConsolePage({ onBack }: { onBack: () => void }) {
 
 function Sidebar({ onBack }: { onBack: () => void }) {
   return (
-    <aside className="hidden w-64 shrink-0 border-r border-border bg-muted/30 lg:block">
+    <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-border bg-muted/30 lg:flex">
       <div className="flex h-16 items-center gap-2.5 border-b border-border px-5">
         <span className="flex size-7 items-center justify-center rounded-sm bg-primary text-sm font-semibold text-primary-foreground">
           C
@@ -85,11 +86,38 @@ function Sidebar({ onBack }: { onBack: () => void }) {
           </button>
         ))}
       </nav>
+
+      <div className="mx-3 mt-2 rounded-md border border-border bg-card p-4">
+        <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+          Governance standing
+        </p>
+        <div className="mt-3 flex items-center gap-3">
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-status-good/15 text-status-good">
+            <ShieldCheck className="size-5" />
+          </span>
+          <div>
+            <p className="text-base font-semibold text-foreground">Good standing</p>
+            <p className="text-sm text-muted-foreground">No overdue reviews</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex-1" />
+
       <div className="border-t border-border p-3">
+        <div className="flex items-center gap-3 rounded-sm px-3.5 py-2.5">
+          <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
+            AC
+          </span>
+          <div className="min-w-0">
+            <p className="truncate text-base font-medium text-foreground">Alex Chen</p>
+            <p className="truncate text-sm text-muted-foreground">Producer · Commodities Desk</p>
+          </div>
+        </div>
         <button
           type="button"
           onClick={onBack}
-          className="flex w-full items-center gap-3 rounded-sm px-3.5 py-2.5 text-left text-base text-muted-foreground hover:bg-accent/60"
+          className="mt-1 flex w-full items-center gap-3 rounded-sm px-3.5 py-2.5 text-left text-base text-muted-foreground hover:bg-accent/60"
         >
           <ArrowLeft className="size-5" />
           Back to landing
@@ -159,7 +187,13 @@ function ChartGrid() {
       <h2 className="text-lg font-semibold text-foreground">My production health</h2>
       <div className="mt-4 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
         {charts.map((c) => (
-          <ChartCard key={c.id} title={c.title} subtitle={c.subtitle} footer={"footer" in c ? c.footer : undefined}>
+          <ChartCard
+            key={c.id}
+            title={c.title}
+            subtitle={c.subtitle}
+            footer={"footer" in c ? c.footer : undefined}
+            center={c.kind !== "hbars"}
+          >
             {c.kind === "gauge" ? <GaugeArc value={c.value} target={c.target} /> : null}
             {c.kind === "donut" ? <DonutRing realised={c.realised} gap={c.gap} /> : null}
             {c.kind === "hbars" ? <HBars rows={c.rows} /> : null}

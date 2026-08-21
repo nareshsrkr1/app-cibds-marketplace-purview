@@ -1,5 +1,16 @@
 import { useState } from "react"
-import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react"
+import {
+  ArrowRight,
+  BookOpenText,
+  CheckCircle2,
+  Database,
+  GitBranch,
+  Lightbulb,
+  Network,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react"
+import type { LucideIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -17,7 +28,6 @@ export function LandingPage({ onOpenWorkspace }: { onOpenWorkspace: () => void }
       <SiteNav onOpenWorkspace={onOpenWorkspace} />
 
       <Hero onOpenWorkspace={onOpenWorkspace} />
-      <ProofStrip />
       <Capabilities />
       <HowItWorks />
       <Faq />
@@ -30,7 +40,7 @@ export function LandingPage({ onOpenWorkspace }: { onOpenWorkspace: () => void }
 function Hero({ onOpenWorkspace }: { onOpenWorkspace: () => void }) {
   return (
     <section className="border-b border-border bg-background">
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 sm:px-8 sm:py-24 lg:grid-cols-2 lg:items-center lg:py-28">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 sm:px-8 sm:py-24 lg:grid-cols-2 lg:items-start lg:py-28">
         <div>
           <div className="mb-5 inline-flex items-center gap-1.5 rounded-sm bg-accent px-3 py-1.5 text-sm font-medium text-accent-foreground">
             Wells Fargo · Corporate &amp; Investment Banking
@@ -58,6 +68,14 @@ function Hero({ onOpenWorkspace }: { onOpenWorkspace: () => void }) {
               Browse the catalogue
             </Button>
           </div>
+          <dl className="mt-12 grid grid-cols-3 gap-x-6 gap-y-6 border-t border-border pt-8 sm:grid-cols-3">
+            {metrics.map((m) => (
+              <div key={m.key}>
+                <dt className="text-2xl font-semibold text-foreground">{m.value}</dt>
+                <dd className="mt-1 text-sm text-muted-foreground">{m.label}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
         <JourneyDiagram />
       </div>
@@ -75,11 +93,11 @@ const journeySteps = [
 
 function JourneyDiagram() {
   return (
-    <div className="rounded-md border border-border bg-card p-8">
+    <div className="flex h-full flex-col rounded-md border border-border bg-card p-8">
       <p className="mb-6 text-sm font-semibold tracking-wide text-muted-foreground uppercase">
         How data moves
       </p>
-      <div className="flex flex-col gap-0">
+      <div className="flex flex-1 flex-col justify-between">
         {journeySteps.map((step, i) => (
           <div key={step.label} className="flex gap-4">
             <div className="flex flex-col items-center">
@@ -94,10 +112,10 @@ function JourneyDiagram() {
                 {i + 1}
               </span>
               {i < journeySteps.length - 1 ? (
-                <span className="my-1 h-9 w-px bg-border" />
+                <span className="my-1 w-px flex-1 bg-border" />
               ) : null}
             </div>
-            <div className="pb-5">
+            <div className={i < journeySteps.length - 1 ? "pb-5" : ""}>
               <p className="text-base font-semibold text-foreground">{step.label}</p>
               <p className="text-sm text-muted-foreground">{step.detail}</p>
             </div>
@@ -108,19 +126,13 @@ function JourneyDiagram() {
   )
 }
 
-function ProofStrip() {
-  return (
-    <section className="border-b border-border bg-muted/50">
-      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-6 py-10 sm:px-8 md:grid-cols-5">
-        {metrics.map((m) => (
-          <div key={m.key} className="text-center md:text-left">
-            <p className="text-3xl font-semibold text-foreground sm:text-4xl">{m.value}</p>
-            <p className="mt-1 text-sm text-muted-foreground">{m.label}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  )
+const capabilityIcons: Record<string, LucideIcon> = {
+  "01": Database,
+  "02": BookOpenText,
+  "03": ShieldCheck,
+  "04": Lightbulb,
+  "05": GitBranch,
+  "06": Network,
 }
 
 function Capabilities() {
@@ -138,39 +150,46 @@ function Capabilities() {
           turns raw data into a firm asset — discoverable, trusted, and ready to use.
         </p>
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {capabilities.map((c) => (
-            <div
-              key={c.n}
-              className={
-                "rounded-md border p-6 " +
-                (c.highlight
-                  ? "border-primary/30 bg-accent"
-                  : "border-border bg-card")
-              }
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold text-muted-foreground">{c.n}</span>
-                {c.highlight ? (
-                  <Badge className="gap-1 bg-primary text-primary-foreground">
-                    <Sparkles className="size-3" />
-                    {c.highlightTag}
-                  </Badge>
-                ) : null}
-              </div>
-              <h3 className="mt-3 text-lg font-semibold text-foreground">{c.title}</h3>
-              <p className="mt-2 text-base text-muted-foreground">{c.body}</p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {c.tags.map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-sm bg-secondary px-2.5 py-1 text-sm text-secondary-foreground"
-                  >
-                    {t}
+          {capabilities.map((c) => {
+            const Icon = capabilityIcons[c.n]
+            return (
+              <div
+                key={c.n}
+                className={
+                  "rounded-md border p-6 " +
+                  (c.highlight
+                    ? "border-primary/30 bg-accent"
+                    : "border-border bg-card")
+                }
+              >
+                <div className="flex items-start justify-between">
+                  <span className="flex size-11 items-center justify-center rounded-md bg-primary/10 text-primary">
+                    <Icon className="size-5" />
                   </span>
-                ))}
+                  {c.highlight ? (
+                    <Badge className="gap-1 bg-primary text-primary-foreground">
+                      <Sparkles className="size-3" />
+                      {c.highlightTag}
+                    </Badge>
+                  ) : (
+                    <span className="text-sm font-semibold text-muted-foreground">{c.n}</span>
+                  )}
+                </div>
+                <h3 className="mt-4 text-lg font-semibold text-foreground">{c.title}</h3>
+                <p className="mt-2 text-base text-muted-foreground">{c.body}</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {c.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-sm bg-secondary px-2.5 py-1 text-sm text-secondary-foreground"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>
@@ -192,10 +211,11 @@ function HowItWorks() {
           captured at every step, so the marketplace can explain any dataset in plain
           language while people stay in control of every decision.
         </p>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="relative mt-14 grid gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="absolute top-[1.125rem] right-[10%] left-[10%] hidden h-px bg-border lg:block" />
           {pipeline.map((step) => (
-            <div key={step.n} className="rounded-md border border-border bg-card p-6">
-              <span className="flex size-9 items-center justify-center rounded-full bg-primary text-base font-semibold text-primary-foreground">
+            <div key={step.n} className="relative">
+              <span className="relative z-10 flex size-9 items-center justify-center rounded-full bg-primary text-base font-semibold text-primary-foreground">
                 {step.n}
               </span>
               <h3 className="mt-4 text-base font-semibold text-foreground">{step.title}</h3>
