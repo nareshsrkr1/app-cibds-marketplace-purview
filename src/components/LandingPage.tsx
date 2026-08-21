@@ -40,15 +40,15 @@ export function LandingPage({ onOpenWorkspace }: { onOpenWorkspace: () => void }
 function Hero({ onOpenWorkspace }: { onOpenWorkspace: () => void }) {
   return (
     <section className="border-b border-border bg-background">
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 sm:px-8 sm:py-24 lg:grid-cols-2 lg:items-start lg:py-28">
+      <div className="mx-auto grid max-w-7xl 2xl:max-w-[96rem] gap-12 px-6 py-20 sm:px-8 sm:py-24 lg:grid-cols-2 lg:items-start lg:py-28">
         <div>
           <div className="mb-5 inline-flex items-center gap-1.5 rounded-sm bg-accent px-3 py-1.5 text-sm font-medium text-accent-foreground">
             Wells Fargo · Corporate &amp; Investment Banking
           </div>
-          <h1 className="text-5xl font-semibold tracking-tight text-foreground sm:text-6xl">
+          <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl 2xl:text-7xl">
             Every dataset has a journey.
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-muted-foreground sm:text-xl">
+          <p className="mt-6 max-w-xl text-base text-muted-foreground sm:text-lg lg:text-xl">
             The single governed marketplace for the firm's data — from the desk
             that creates it to the team that relies on it. Checked, classified,
             and traceable from source to consumer.
@@ -68,10 +68,10 @@ function Hero({ onOpenWorkspace }: { onOpenWorkspace: () => void }) {
               Browse the catalogue
             </Button>
           </div>
-          <dl className="mt-12 grid grid-cols-3 gap-x-6 gap-y-6 border-t border-border pt-8 sm:grid-cols-3">
+          <dl className="mt-12 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-border pt-8 sm:grid-cols-3 xl:grid-cols-5">
             {metrics.map((m) => (
               <div key={m.key}>
-                <dt className="text-2xl font-semibold text-foreground">{m.value}</dt>
+                <dt className="text-xl font-semibold text-foreground sm:text-2xl">{m.value}</dt>
                 <dd className="mt-1 text-sm text-muted-foreground">{m.label}</dd>
               </div>
             ))}
@@ -138,7 +138,7 @@ const capabilityIcons: Record<string, LucideIcon> = {
 function Capabilities() {
   return (
     <section id="capabilities" className="border-b border-border">
-      <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8 sm:py-24">
+      <div className="mx-auto max-w-7xl 2xl:max-w-[96rem] px-6 py-20 sm:px-8 sm:py-24">
         <p className="text-sm font-semibold tracking-wide text-primary uppercase">
           Platform capabilities
         </p>
@@ -199,7 +199,7 @@ function Capabilities() {
 function HowItWorks() {
   return (
     <section id="how-it-works" className="border-b border-border bg-muted/50">
-      <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8 sm:py-24">
+      <div className="mx-auto max-w-7xl 2xl:max-w-[96rem] px-6 py-20 sm:px-8 sm:py-24">
         <p className="text-sm font-semibold tracking-wide text-primary uppercase">
           How it works
         </p>
@@ -265,7 +265,7 @@ function Faq() {
 function CtaBand({ onOpenWorkspace }: { onOpenWorkspace: () => void }) {
   return (
     <section className="bg-primary">
-      <div className="mx-auto flex max-w-7xl flex-col items-start gap-8 px-6 py-16 sm:px-8 md:flex-row md:items-center md:justify-between">
+      <div className="mx-auto flex max-w-7xl 2xl:max-w-[96rem] flex-col items-start gap-8 px-6 py-16 sm:px-8 md:flex-row md:items-center md:justify-between">
         <div>
           <h2 className="text-3xl font-semibold tracking-tight text-primary-foreground sm:text-4xl">
             Your data has value. Let the firm use it.
@@ -292,7 +292,7 @@ function CtaBand({ onOpenWorkspace }: { onOpenWorkspace: () => void }) {
 function Footer() {
   return (
     <footer className="bg-background">
-      <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-3 px-6 py-10 sm:flex-row sm:items-center sm:px-8">
+      <div className="mx-auto flex max-w-7xl 2xl:max-w-[96rem] flex-col items-start justify-between gap-3 px-6 py-10 sm:flex-row sm:items-center sm:px-8">
         <div className="flex items-center gap-2.5">
           <span className="flex size-7 items-center justify-center rounded-sm bg-primary text-sm font-semibold text-primary-foreground">
             C

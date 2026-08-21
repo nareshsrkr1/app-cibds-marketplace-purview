@@ -1,3 +1,4 @@
+import { useState } from "react"
 import {
   ArrowLeft,
   LayoutGrid,
@@ -9,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet"
 import { ChartCard } from "@/components/charts/ChartCard"
 import { GaugeArc } from "@/components/charts/GaugeArc"
 import { DonutRing } from "@/components/charts/DonutRing"
@@ -30,15 +32,23 @@ const navItems = [
 ]
 
 export function ConsolePage({ onBack }: { onBack: () => void }) {
+  const [navOpen, setNavOpen] = useState(false)
+
   return (
     <div className="flex min-h-screen bg-background">
-      <Sidebar onBack={onBack} />
-      <main className="flex-1 px-6 py-10 sm:px-10">
-        <div className="mx-auto max-w-6xl">
-          <ConsoleHeader />
+      <Sidebar onBack={onBack} className="hidden lg:flex" />
+      <Sheet open={navOpen} onOpenChange={setNavOpen}>
+        <SheetContent side="left" className="w-72 p-0">
+          <SheetTitle className="sr-only">Console navigation</SheetTitle>
+          <Sidebar onBack={onBack} className="flex" />
+        </SheetContent>
+      </Sheet>
+      <main className="min-w-0 flex-1 px-4 py-8 sm:px-8 sm:py-10 lg:px-10">
+        <div className="mx-auto max-w-6xl 2xl:max-w-[88rem]">
+          <ConsoleHeader onMenuClick={() => setNavOpen(true)} />
           <KpiRow />
           <ActionRow />
-          <Tabs defaultValue="overview" className="mt-10">
+          <Tabs defaultValue="overview" className="mt-8 sm:mt-10">
             <TabsList>
               <TabsTrigger value="overview" className="text-base">
                 Overview
@@ -60,9 +70,14 @@ export function ConsolePage({ onBack }: { onBack: () => void }) {
   )
 }
 
-function Sidebar({ onBack }: { onBack: () => void }) {
+function Sidebar({ onBack, className = "" }: { onBack: () => void; className?: string }) {
   return (
-    <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-border bg-muted/30 lg:flex">
+    <aside
+      className={
+        "sticky top-0 h-screen w-64 shrink-0 flex-col border-r border-border bg-muted/30 " +
+        className
+      }
+    >
       <div className="flex h-16 items-center gap-2.5 border-b border-border px-5">
         <span className="flex size-7 items-center justify-center rounded-sm bg-primary text-sm font-semibold text-primary-foreground">
           C
@@ -127,7 +142,7 @@ function Sidebar({ onBack }: { onBack: () => void }) {
   )
 }
 
-function ConsoleHeader() {
+function ConsoleHeader({ onMenuClick }: { onMenuClick: () => void }) {
   return (
     <div className="flex flex-wrap items-start justify-between gap-4">
       <div>
@@ -136,7 +151,7 @@ function ConsoleHeader() {
         </p>
         <p className="mt-1.5 max-w-xl text-base text-muted-foreground">{hero.subtitle}</p>
       </div>
-      <Button variant="outline" size="sm" className="lg:hidden" onClick={() => {}}>
+      <Button variant="outline" size="sm" className="lg:hidden" onClick={onMenuClick}>
         <LayoutGrid className="size-4" />
         Menu
       </Button>
