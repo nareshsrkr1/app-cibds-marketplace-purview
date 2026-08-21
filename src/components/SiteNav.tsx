@@ -10,10 +10,10 @@ import {
 function Brand() {
   return (
     <div className="flex items-center gap-2.5">
-      <span className="flex h-8 w-8 items-center justify-center rounded-sm bg-primary text-base font-semibold text-primary-foreground">
+      <span className="flex h-8 w-8 items-center justify-center rounded-sm bg-primary text-lg font-semibold text-primary-foreground">
         C
       </span>
-      <span className="text-base font-semibold text-foreground">CIB Data Marketplace</span>
+      <span className="text-lg font-semibold text-foreground">CIB Data Marketplace</span>
     </div>
   )
 }
@@ -34,14 +34,14 @@ export function SiteNav({ onOpenWorkspace }: { onOpenWorkspace: () => void }) {
             <a
               key={l.href}
               href={l.href}
-              className="text-base text-foreground/80 transition-colors hover:text-primary"
+              className="text-lg text-foreground/80 transition-colors hover:text-primary"
             >
               {l.label}
             </a>
           ))}
         </nav>
         <div className="hidden md:block">
-          <Button onClick={onOpenWorkspace} className="h-10 px-5 text-base">
+          <Button onClick={onOpenWorkspace} className="h-10 px-5 text-lg">
             Open workspace
           </Button>
         </div>

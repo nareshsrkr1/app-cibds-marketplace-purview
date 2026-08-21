@@ -45,10 +45,10 @@ function Hero({ onOpenWorkspace }: { onOpenWorkspace: () => void }) {
           <div className="mb-5 inline-flex items-center gap-1.5 rounded-sm bg-accent px-3 py-1.5 text-sm font-medium text-accent-foreground">
             Wells Fargo · Corporate &amp; Investment Banking
           </div>
-          <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl 2xl:text-7xl">
+          <h1 className="text-5xl font-semibold tracking-tight text-foreground sm:text-6xl lg:text-7xl 2xl:text-8xl">
             Every dataset has a journey.
           </h1>
-          <p className="mt-6 max-w-xl text-base text-muted-foreground sm:text-lg lg:text-xl">
+          <p className="mt-6 max-w-xl text-lg text-muted-foreground sm:text-xl lg:text-2xl">
             The single governed marketplace for the firm's data — from the desk
             that creates it to the team that relies on it. Checked, classified,
             and traceable from source to consumer.
@@ -142,10 +142,10 @@ function Capabilities() {
         <p className="text-sm font-semibold tracking-wide text-primary uppercase">
           Platform capabilities
         </p>
-        <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+        <h2 className="mt-3 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
           Six reasons data moves with confidence.
         </h2>
-        <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
+        <p className="mt-4 max-w-2xl text-xl text-muted-foreground">
           The Data Marketplace is not a filing system. It is the infrastructure that
           turns raw data into a firm asset — discoverable, trusted, and ready to use.
         </p>
@@ -175,8 +175,8 @@ function Capabilities() {
                     <span className="text-sm font-semibold text-muted-foreground">{c.n}</span>
                   )}
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-foreground">{c.title}</h3>
-                <p className="mt-2 text-base text-muted-foreground">{c.body}</p>
+                <h3 className="mt-4 text-xl font-semibold text-foreground">{c.title}</h3>
+                <p className="mt-2 text-lg text-muted-foreground">{c.body}</p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {c.tags.map((t) => (
                     <span
@@ -203,10 +203,10 @@ function HowItWorks() {
         <p className="text-sm font-semibold tracking-wide text-primary uppercase">
           How it works
         </p>
-        <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+        <h2 className="mt-3 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
           From one team to another — safely, and traceably.
         </h2>
-        <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
+        <p className="mt-4 max-w-2xl text-xl text-muted-foreground">
           Every dataset follows the same simple path — with meaning and traceability
           captured at every step, so the marketplace can explain any dataset in plain
           language while people stay in control of every decision.
@@ -236,7 +236,7 @@ function Faq() {
         <p className="text-center text-sm font-semibold tracking-wide text-primary uppercase">
           Frequently asked
         </p>
-        <h2 className="mt-3 text-center text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+        <h2 className="mt-3 text-center text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
           Questions, answered.
         </h2>
         <Accordion
@@ -248,10 +248,10 @@ function Faq() {
         >
           {faqs.map((f) => (
             <AccordionItem key={f.q} value={f.q}>
-              <AccordionTrigger className="text-left text-base font-medium">
+              <AccordionTrigger className="text-left text-lg font-medium">
                 {f.q}
               </AccordionTrigger>
-              <AccordionContent className="text-base text-muted-foreground">
+              <AccordionContent className="text-lg text-muted-foreground">
                 {f.a}
               </AccordionContent>
             </AccordionItem>
@@ -267,7 +267,7 @@ function CtaBand({ onOpenWorkspace }: { onOpenWorkspace: () => void }) {
     <section className="bg-primary">
       <div className="mx-auto flex max-w-7xl 2xl:max-w-[96rem] flex-col items-start gap-8 px-6 py-16 sm:px-8 md:flex-row md:items-center md:justify-between">
         <div>
-          <h2 className="text-3xl font-semibold tracking-tight text-primary-foreground sm:text-4xl">
+          <h2 className="text-4xl font-semibold tracking-tight text-primary-foreground sm:text-5xl">
             Your data has value. Let the firm use it.
           </h2>
           <p className="mt-3 flex items-center gap-2 text-lg text-primary-foreground/85">
@@ -297,12 +297,12 @@ function Footer() {
           <span className="flex size-7 items-center justify-center rounded-sm bg-primary text-sm font-semibold text-primary-foreground">
             C
           </span>
-          <span className="text-base text-foreground">Data Marketplace</span>
-          <span className="text-base text-muted-foreground">
+          <span className="text-lg text-foreground">Data Marketplace</span>
+          <span className="text-lg text-muted-foreground">
             · CIB Data Services · Internal use only
           </span>
         </div>
-        <p className="text-base text-muted-foreground">© 2026 Wells Fargo</p>
+        <p className="text-lg text-muted-foreground">© 2026 Wells Fargo</p>
       </div>
     </footer>
   )
