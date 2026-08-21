@@ -164,8 +164,8 @@ function Hero({ onOpenWorkspace }: { onOpenWorkspace: () => void }) {
           <div className="mb-6 inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-4 py-1.5 text-sm font-medium text-muted-foreground shadow-sm">
             Wells Fargo · Corporate &amp; Investment Banking
           </div>
-          <h1 className="text-5xl leading-[1.08] font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl">
-            Every dataset has a journey.
+          <h1 className="text-4xl leading-[1.12] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl">
+            Every dataset has a <span className="text-primary italic">journey.</span>
           </h1>
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground sm:text-xl">
             The single governed marketplace for the firm's data — from the desk
