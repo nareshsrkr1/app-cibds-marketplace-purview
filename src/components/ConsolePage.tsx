@@ -82,7 +82,7 @@ function Sidebar({ onBack, className = "" }: { onBack: () => void; className?: s
         <span className="flex size-7 items-center justify-center rounded-sm bg-primary text-sm font-semibold text-primary-foreground">
           C
         </span>
-        <span className="text-base font-semibold text-foreground">Producer Console</span>
+        <span className="text-base font-semibold text-foreground">CIB Marketplace</span>
       </div>
       <nav className="flex flex-col gap-1 p-3">
         {navItems.map((item) => (
@@ -146,7 +146,7 @@ function ConsoleHeader({ onMenuClick }: { onMenuClick: () => void }) {
   return (
     <div className="flex flex-wrap items-start justify-between gap-4">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+        <h1 className="text-2xl font-semibold tracking-tight text-primary sm:text-3xl">
           {hero.eyebrow}
         </h1>
         <p className="mt-1.5 max-w-xl text-base text-muted-foreground">{hero.subtitle}</p>
