@@ -159,7 +159,7 @@ function Hero({ onOpenWorkspace }: { onOpenWorkspace: () => void }) {
             "radial-gradient(50% 60% at 15% 0%, var(--primary), transparent 70%)",
         }}
       />
-      <div className="relative mx-auto grid max-w-7xl 2xl:max-w-[96rem] gap-10 px-6 py-10 sm:px-8 sm:py-14 lg:grid-cols-[1fr_1.15fr] lg:items-start lg:gap-16 lg:py-16">
+      <div className="relative mx-auto grid max-w-7xl 2xl:max-w-[96rem] gap-10 px-6 py-10 sm:px-8 sm:py-12 lg:grid-cols-[1fr_1.15fr] lg:items-start lg:gap-12 lg:py-14">
         <div>
           <div className="mb-6 inline-flex w-fit items-center gap-1.5 rounded-full border border-border bg-card px-4 py-1.5 text-sm font-medium text-muted-foreground shadow-sm">
             Wells Fargo · Corporate &amp; Investment Banking
@@ -192,7 +192,7 @@ function Hero({ onOpenWorkspace }: { onOpenWorkspace: () => void }) {
           </div>
         </div>
 
-        <div className="lg:pl-6">
+        <div>
           <HeroPreview />
           <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
             <span className="flex size-1.5 rounded-full bg-status-good" />
@@ -241,7 +241,7 @@ function TrustStrip() {
 function StatsBand() {
   return (
     <section className="bg-foreground">
-      <div className="mx-auto max-w-7xl 2xl:max-w-[96rem] px-6 py-14 sm:px-8">
+      <div className="mx-auto max-w-7xl 2xl:max-w-[96rem] px-6 py-10 sm:px-8">
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-5">
           {metrics.map((m) => (
             <div key={m.key}>
@@ -367,7 +367,7 @@ function UseCases() {
   const [active, setActive] = useState(0)
   const current = useCases[active]
   return (
-    <section className="mx-auto max-w-7xl 2xl:max-w-[96rem] px-6 py-16 sm:px-8 sm:py-24">
+    <section className="mx-auto max-w-7xl 2xl:max-w-[96rem] px-6 py-14 sm:px-8 sm:py-20">
       <div className="max-w-2xl">
         <p className="text-sm font-semibold tracking-wide text-primary uppercase">Built for every role</p>
         <h2 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
@@ -375,7 +375,7 @@ function UseCases() {
         </h2>
       </div>
 
-      <div className="mt-8 flex flex-wrap gap-2">
+      <div className="mt-6 flex flex-wrap gap-2">
         {useCases.map((u, i) => (
           <button
             key={u.key}
@@ -393,7 +393,7 @@ function UseCases() {
         ))}
       </div>
 
-      <div className="mt-10 grid items-start gap-12 lg:grid-cols-[0.85fr_1.15fr]">
+      <div className="mt-8 grid items-start gap-10 lg:grid-cols-[0.85fr_1.15fr]">
         <div>
           <h3 className="text-2xl font-semibold tracking-tight text-foreground">{current.title}</h3>
           <p className="mt-3 text-lg leading-relaxed text-muted-foreground">{current.body}</p>
@@ -471,8 +471,8 @@ function WorkflowPreview() {
 function HowItWorks() {
   return (
     <section id="how-it-works" className="border-t border-border bg-card/60">
-      <div className="mx-auto max-w-7xl 2xl:max-w-[96rem] px-6 py-16 sm:px-8 sm:py-24">
-        <div className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+      <div className="mx-auto max-w-7xl 2xl:max-w-[96rem] px-6 py-14 sm:px-8 sm:py-20">
+        <div className="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <p className="text-sm font-semibold tracking-wide text-primary uppercase">
               How it works
@@ -485,7 +485,7 @@ function HowItWorks() {
               traceability captured at every step, tracked from the moment it's
               produced to the moment it's consumed.
             </p>
-            <div className="mt-8 flex flex-col gap-4">
+            <div className="mt-6 flex flex-col gap-4">
               {pipeline.map((s, i) => {
                 const Icon = pipelineIcons[i] ?? Sprout
                 return (
@@ -514,9 +514,9 @@ function HowItWorks() {
 
 function Capabilities() {
   return (
-    <section id="capabilities" className="py-16 sm:py-24">
+    <section id="capabilities" className="py-14 sm:py-20">
       <div className="mx-auto max-w-7xl 2xl:max-w-[96rem] px-6 sm:px-8">
-        <div className="mb-10 max-w-xl">
+        <div className="mb-8 max-w-xl">
           <p className="text-sm font-semibold tracking-wide text-primary uppercase">
             Platform capabilities
           </p>
@@ -557,7 +557,7 @@ function Capabilities() {
 function Faq() {
   const [open, setOpen] = useState<string | undefined>(undefined)
   return (
-    <section id="faq" className="mx-auto max-w-7xl 2xl:max-w-[96rem] px-6 py-16 sm:px-8 sm:py-24">
+    <section id="faq" className="mx-auto max-w-7xl 2xl:max-w-[96rem] px-6 py-14 sm:px-8 sm:py-20">
       <div className="grid gap-10 lg:grid-cols-[320px_1fr]">
         <div>
           <p className="text-sm font-semibold tracking-wide text-primary uppercase">Frequently asked</p>
@@ -596,7 +596,7 @@ function Faq() {
 function CtaBand({ onOpenWorkspace }: { onOpenWorkspace: () => void }) {
   return (
     <section className="bg-primary">
-      <div className="mx-auto flex max-w-7xl 2xl:max-w-[96rem] flex-col items-start gap-8 px-6 py-16 sm:px-8 md:flex-row md:items-center md:justify-between">
+      <div className="mx-auto flex max-w-7xl 2xl:max-w-[96rem] flex-col items-start gap-8 px-6 py-12 sm:px-8 md:flex-row md:items-center md:justify-between">
         <div>
           <h2 className="text-4xl font-semibold tracking-tight text-primary-foreground sm:text-5xl">
             Your data has value. Let the firm use it.
@@ -643,7 +643,7 @@ const footerColumns = [
 function Footer() {
   return (
     <footer className="bg-foreground text-background">
-      <div className="mx-auto max-w-7xl 2xl:max-w-[96rem] px-6 py-14 sm:px-8">
+      <div className="mx-auto max-w-7xl 2xl:max-w-[96rem] px-6 py-12 sm:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-2.5">
@@ -671,7 +671,7 @@ function Footer() {
             </div>
           ))}
         </div>
-        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-background/10 pt-6 sm:flex-row sm:items-center">
+        <div className="mt-10 flex flex-col items-start justify-between gap-3 border-t border-background/10 pt-6 sm:flex-row sm:items-center">
           <p className="text-sm text-background/50">© 2026 Wells Fargo · Internal use only</p>
           <p className="text-sm text-background/50">CIB Data Services</p>
         </div>
