@@ -122,10 +122,10 @@ function Sidebar({ onBack, className = "" }: { onBack: () => void; className?: s
       <div className="border-t border-border p-3">
         <div className="flex items-center gap-3 rounded-sm px-3.5 py-2.5">
           <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
-            AC
+            NN
           </span>
           <div className="min-w-0">
-            <p className="truncate text-base font-medium text-foreground">Alex Chen</p>
+            <p className="truncate text-base font-medium text-foreground">Naresh Nimmala</p>
             <p className="truncate text-sm text-muted-foreground">Producer · Commodities Desk</p>
           </div>
         </div>
