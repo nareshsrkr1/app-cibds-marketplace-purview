@@ -471,7 +471,7 @@ function WorkflowPreview() {
 function HowItWorks() {
   return (
     <section id="how-it-works" className="border-t border-border bg-card/60">
-      <div className="mx-auto max-w-7xl 2xl:max-w-[96rem] px-6 py-14 sm:px-8 sm:py-20">
+      <div className="mx-auto max-w-7xl 2xl:max-w-[96rem] px-6 pt-14 pb-8 sm:px-8 sm:pt-20 sm:pb-10">
         <div className="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <p className="text-sm font-semibold tracking-wide text-primary uppercase">
@@ -514,9 +514,9 @@ function HowItWorks() {
 
 function Capabilities() {
   return (
-    <section id="capabilities" className="py-14 sm:py-20">
+    <section id="capabilities" className="pt-8 pb-8 sm:pt-10 sm:pb-10">
       <div className="mx-auto max-w-7xl 2xl:max-w-[96rem] px-6 sm:px-8">
-        <div className="mb-8 max-w-xl">
+        <div className="mb-5 max-w-xl">
           <p className="text-sm font-semibold tracking-wide text-primary uppercase">
             Platform capabilities
           </p>
@@ -557,7 +557,7 @@ function Capabilities() {
 function Faq() {
   const [open, setOpen] = useState<string | undefined>(undefined)
   return (
-    <section id="faq" className="mx-auto max-w-7xl 2xl:max-w-[96rem] px-6 py-14 sm:px-8 sm:py-20">
+    <section id="faq" className="mx-auto max-w-7xl 2xl:max-w-[96rem] px-6 pt-8 pb-14 sm:px-8 sm:pt-10 sm:pb-20">
       <div className="grid gap-10 lg:grid-cols-[320px_1fr]">
         <div>
           <p className="text-sm font-semibold tracking-wide text-primary uppercase">Frequently asked</p>
